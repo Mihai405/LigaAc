@@ -8,7 +8,7 @@ export function MovieList() {
 
     useEffect(() =>{
             async function getMovies() {
-                const res=await fetch("http://localhost:3001/movies?_limit=10");
+                const res=await fetch("http://127.0.0.1:8000/api/movie/");
                 const data= await res.json();
                 setMovies(data);
             }

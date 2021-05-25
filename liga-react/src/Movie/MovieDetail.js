@@ -10,7 +10,7 @@ export function MovieDetail() {
   useEffect(() => {
     async function getMovie() {
       const data = await fetch(
-        `http://localhost:3001/movies/${id}`
+        `http://127.0.0.1:8000/api/movie/${id}`
       ).then((res) => res.json());
 
       setMovie(data);
@@ -26,11 +26,11 @@ export function MovieDetail() {
     <>
       <h1>{movie.title}</h1>
 
-      <button>
-      <Link to="/movies" >
-        Go back
-      </Link>
-      </button>
+      {movie.ratings.map( (rating) => { return <h3>{rating.source} ":" {rating.value} </h3>})}
+
+      <a href={`https://www.imdb.com/title/${movie.imdbid}`} target="_blank">
+        Imdb movie page
+      </a>
     </>
   );
 }
