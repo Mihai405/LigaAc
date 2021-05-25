@@ -23,10 +23,11 @@ export function Login() {
       },
       body:JSON.stringify(values),
     }).then((res)=>res.json());
-    console.log(response);
 
-    if(response.token){
-      onLogin(response.token,response.user);
+    const { token }=response;
+
+    if(token){
+      onLogin(token);
     }
   }
 

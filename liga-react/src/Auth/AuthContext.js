@@ -9,7 +9,17 @@ export function AuthContextProvider({ children }) {
     user:null,
   })
 
-  function onLogin(token,user){
+  async function onLogin(token){
+
+    const res=await fetch('http://localhost:8000/core/current_user/', {
+        headers: {
+          Authorization: `JWT ${token}`,
+        }
+      })
+
+    const user=await res.json();
+    console.log(user);
+
     const newValue={
       token,
       user,
