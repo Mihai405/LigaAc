@@ -65,7 +65,7 @@ export function Register() {
             type="text"
             id="username"
             onChange={handleInputChange}
-            value={values.email}
+            value={values.username}
           />
           {errors.email !== '' ? <strong>{errors.email}</strong> : null}
         </div>

@@ -1,30 +1,54 @@
-import { NavLink } from "react-router-dom";
+import { NavLink } from 'react-router-dom';
+import { useAuthContext } from '../Auth/AuthContext';
+
+import styles from './Nav.module.css';
 
 export function Nav() {
-    return(
-        <>
-         <nav>
-            <ul>
-                <li>
-                    <NavLink to="/">
-                        <h1>Home</h1>
-                    </NavLink>
-                </li>
+  const { user, onLogout } = useAuthContext();
 
-                <li>
-                    <NavLink to="/movies">
-                        <h1>Movies</h1>
-                    </NavLink>
-                </li>
+  function handleLogout(e) {
+    e.preventDefault();
+    onLogout();
+  }
 
-                <li>
-                    <NavLink to="/register">
-                        <h1>Register</h1>
-                    </NavLink>
-                </li>
-                
-            </ul>
-        </nav>
-    </>
-    );
+  return (
+    <nav>
+      <ul className={styles['main-menu']}>
+        <li>
+          <NavLink activeClassName={styles.active} exact to="/">
+            Home
+          </NavLink>
+        </li>
+        <li>
+          <NavLink activeClassName={styles.active} to="/movies">
+            Movies
+          </NavLink>
+        </li>
+
+        {(!user || !user.username) && (
+          <>
+            <li className={styles['right-align']}>
+              <NavLink activeClassName={styles.active} to="/login">
+                Login
+              </NavLink>
+            </li>
+            <li>
+              <NavLink activeClassName={styles.active} to="/register">
+                Register
+              </NavLink>
+            </li>
+          </>
+        )}
+
+        {user && user.username && (
+          <li className={styles['right-align']}>
+            Welcome {user.username}!{' '}
+            <a href="/" onClick={handleLogout}>
+              Logout
+            </a>
+          </li>
+        )}
+      </ul>
+    </nav>
+  );
 }

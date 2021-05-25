@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
-import { Link } from "react-router-dom";
 
 export function MovieDetail() {
 
@@ -28,7 +27,7 @@ export function MovieDetail() {
 
       {movie.ratings.map( (rating) => { return <h3>{rating.source} ":" {rating.value} </h3>})}
 
-      <a href={`https://www.imdb.com/title/${movie.imdbid}`} target="_blank">
+      <a href={`https://www.imdb.com/title/${movie.imdbid}`}>
         Imdb movie page
       </a>
     </>

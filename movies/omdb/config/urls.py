@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path , include
-
+from rest_framework_jwt.views import obtain_jwt_token
 from rest_framework.routers import DefaultRouter
 
 from movies.urls import routes as movie_routes
@@ -27,5 +27,7 @@ for r in movie_routes:
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/' ,include(router.urls))
+    path('api/' ,include(router.urls)),
+    path('token-auth/', obtain_jwt_token),
+    path('core/', include('users.urls')),
 ]
