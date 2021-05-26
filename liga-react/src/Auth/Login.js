@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Redirect } from 'react-router';
 import { useAuthContext } from './AuthContext';
 
 export function Login() {
@@ -7,7 +8,7 @@ export function Login() {
     password: '',
   });
 
-  const {onLogin} =useAuthContext();
+  const { user , onLogin } =useAuthContext();
 
   function handleInputChange(e) {
     setValues({ ...values, [e.target.id]: e.target.value });
@@ -52,7 +53,15 @@ export function Login() {
           value={values.password}
         />
       </div>
-      <button type="submit">Login</button>
+
+      <button type="submit">
+        Login
+      </button>
+
+      {user && <>
+        {console.log({user})}
+        <Redirect to='/' />
+      </>}
     </form>
   );
 }

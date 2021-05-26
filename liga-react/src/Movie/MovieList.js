@@ -6,22 +6,30 @@ export function MovieList() {
 
     const [movies , setMovies]=useState([]);
 
+    const [searchMovie,setSearchMovie]=useState('');
+
     useEffect(() =>{
             async function getMovies() {
                 const res=await fetch("http://127.0.0.1:8000/api/movie/");
                 const data= await res.json();
-                setMovies(data);
+                setMovies(data.filter( movie => movie.title.toLowerCase().includes(searchMovie.toLowerCase())));
             }
 
             getMovies();
 
         },
-        [])
+        [searchMovie])
 
-        
+    function onSearchChange(e){
+        setSearchMovie(e.target.value);
+    }  
 
     return(
         <>
+            <div>
+                <input id='searchMovies' type='search' placeholder='search movie' onChange={onSearchChange}/>  
+            </div>
+
             {movies.length===0 && <h1>Loading ...</h1>}
 
             <main className={styles['movie-list']}>

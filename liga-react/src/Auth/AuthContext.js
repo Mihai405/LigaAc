@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
 import { useLocalStorage } from '../shared/useLocalStorage';
 
 const AuthContext = React.createContext();
@@ -18,7 +19,7 @@ export function AuthContextProvider({ children }) {
       })
 
     const user=await res.json();
-    console.log(user);
+    //console.log(user);
 
     const newValue={
       token,
