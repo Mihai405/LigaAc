@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 
+
+
 export function MovieDetail() {
 
   const [movie, setMovie] = useState(null);
@@ -23,13 +25,40 @@ export function MovieDetail() {
   }
   return (
     <>
-      <h1>{movie.title}</h1>
+    <div >
 
-      {movie.ratings.map( (rating) => { return <h3>{rating.source} ":" {rating.value} </h3>})}
+        <h1>{movie.title}</h1>
 
-      <a href={`https://www.imdb.com/title/${movie.imdbid}`} target="_blank">
-        Imdb movie page
-      </a>
+        <a href={`https://www.imdb.com/title/${movie.imdbid}`} target="_blank">
+          <img src={movie.poster} alt="poster" />
+        </a>
+        <br />
+
+        <span>Genre:{movie.genre}</span>
+        <br />
+
+        {movie.plot}
+        <br />
+        <hr />
+
+        <span>Director: {movie.director}</span>
+        <br />
+        <hr />
+
+        <span>Writers: {movie.writer}</span>
+        <br />
+        <hr />
+
+        <span>Actors: {movie.actors}</span>
+      </div>
+
+      <div>
+        <br /><br /><hr />
+        Ratings:<br />
+        {
+          movie.ratings.map( (rating) => { return <>{rating.source} ":" {rating.value} <br /></>})}
+        <hr />
+      </div>
     </>
   );
 }
