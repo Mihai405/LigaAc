@@ -8,10 +8,13 @@ export function Login() {
     password: '',
   });
 
+  const [error, setError] = useState('');
+
   const { user , onLogin } =useAuthContext();
 
   function handleInputChange(e) {
     setValues({ ...values, [e.target.id]: e.target.value });
+    setError("");
   }
 
   async function handleSubmit(e) {
@@ -29,6 +32,10 @@ export function Login() {
 
     if(token){
       onLogin(token);
+    }
+
+    if(!token){
+      setError("The credentials are not valid!");
     }
   }
 
@@ -62,6 +69,10 @@ export function Login() {
         {console.log({user})}
         <Redirect to='/' />
       </>}
+
+      <div>
+        {error !=="" ? <strong>{error}</strong> : null}
+      </div>
     </form>
   );
 }

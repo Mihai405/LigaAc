@@ -62,7 +62,12 @@ export function Register() {
           body: JSON.stringify(values),
         }).then((res) => res.json());
 
-        if(response.username[0]==="A user with that username already exists."){
+        console.log(response);
+        if(response.email && response.email[0]==="Enter a valid email address."){
+          setErrors({...errors,email:"Enter a valid email address."}) 
+        }
+
+        if(response.username && response.username[0]==="A user with that username already exists."){
           setErrors({...errors, username:response.username[0]});
           setValues({...values , accountCreated:''});
         }
