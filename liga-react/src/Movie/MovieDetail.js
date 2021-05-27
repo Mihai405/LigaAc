@@ -45,7 +45,11 @@ export function MovieDetail() {
         <br />
         <hr />
 
-        {movie.plot}
+        <span>Type : {movie.type}</span>
+        <br />
+        <hr />
+
+        <span>Plot : {movie.plot}</span>{movie.plot}
         <br />
         <hr />
 
@@ -58,14 +62,32 @@ export function MovieDetail() {
         <hr />
 
         <span>Actors : {movie.actors}</span>
+        <br />
+        <hr />
+
+        <span>Production : {movie.production}</span>
+        <br />
+        <hr />
+
+        <span>Country : {movie.country}</span>
+        <br />
+        <hr />
+
+        <span> Language : {movie.language}</span>
+        <br />
+        <hr />
+
+        <span>Awards : {movie.awards}</span>
+        <br />
+        <hr />
+
       </div>
 
       <div>
-        <br /><br /><hr />
         Ratings : <br />
         {
-          movie.ratings.map( (rating) => { return <>{rating.source} ":" {rating.value} <br /></>})}
-        <hr />
+          movie.ratings.map( (rating) => { return <> {rating.source} :" {rating.value} <br />
+          </>})}
       </div>
     </>
   );
