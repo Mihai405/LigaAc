@@ -3,13 +3,13 @@ import { AuthContextProvider } from './Auth/AuthContext';
 import { Login } from './Auth/Login';
 import { Register } from './Auth/Register';
 import { MovieList , MovieDetail} from './Movie';
-import { Nav } from "./Nav/Nav";
+import  NavBar  from "./Nav/NavBar";
 
 export function App() {
   return(
     <AuthContextProvider>
     <BrowserRouter>
-      <Nav />
+      <NavBar />
       <Switch>
         <Route exact path="/" component={() => <h1>Home Page</h1>} />
         <Route path="/register" component={Register} />

@@ -26,8 +26,8 @@ export function MovieList() {
 
     return(
         <>
-            <div>
-                <input id='searchMovies' type='search' placeholder='search movie' onChange={onSearchChange}/>
+            <div style={{textAlign:"center"}}>
+                <br /><input id='searchMovies' type='search' placeholder='search movie' onChange={onSearchChange}/>
                 <br /><br /><br />
             </div>
 

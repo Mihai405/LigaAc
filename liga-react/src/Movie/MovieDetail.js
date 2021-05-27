@@ -26,7 +26,6 @@ export function MovieDetail() {
   return (
     <>
     <div >
-
         <h1>{movie.title}</h1>
 
         <a href={`https://www.imdb.com/title/${movie.imdbid}`} target="_blank">
@@ -34,27 +33,36 @@ export function MovieDetail() {
         </a>
         <br />
 
-        <span>Genre:{movie.genre}</span>
+        <span>Metascore : {movie.metascore}</span>
         <br />
+        <hr />
+
+        <span>Released in : {movie.year}</span>
+        <br />
+        <hr />
+
+        <span>Genre : {movie.genre}</span>
+        <br />
+        <hr />
 
         {movie.plot}
         <br />
         <hr />
 
-        <span>Director: {movie.director}</span>
+        <span>Director : {movie.director}</span>
         <br />
         <hr />
 
-        <span>Writers: {movie.writer}</span>
+        <span>Writers : {movie.writer}</span>
         <br />
         <hr />
 
-        <span>Actors: {movie.actors}</span>
+        <span>Actors : {movie.actors}</span>
       </div>
 
       <div>
         <br /><br /><hr />
-        Ratings:<br />
+        Ratings : <br />
         {
           movie.ratings.map( (rating) => { return <>{rating.source} ":" {rating.value} <br /></>})}
         <hr />
