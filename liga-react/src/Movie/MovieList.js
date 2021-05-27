@@ -27,7 +27,7 @@ export function MovieList() {
     return(
         <>
             <div>
-                <input id='searchMovies' type='search' placeholder='search movie' onChange={onSearchChange}/>  
+                <input id='searchMovies' type='search' placeholder='search movie' onChange={onSearchChange}/>
             </div>
 
             {movies.length===0 && <h1>Loading ...</h1>}

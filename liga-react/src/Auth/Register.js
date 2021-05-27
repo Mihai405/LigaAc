@@ -5,21 +5,22 @@ export function Register() {
     const [values, setValues] = useState({
         username: '',
         password: '',
-        retypePassword: '',
+        email: '',
         firstName: '',
         lastName: '',
+        accountCreated:'',
       });
       const [errors, setErrors] = useState({
         username: '',
         password: '',
-        retypePassword: '',
+        email: '',
         firstName: '',
         lastName: '',
       });
     
       function handleInputChange(e) {
         setErrors({ ...errors, [e.target.id]: '' });
-        setValues({ ...values, [e.target.id]: e.target.value });
+        setValues({ ...values, [e.target.id]: e.target.value , accountCreated:''});
       }
     
       function formIsValid() {
@@ -30,6 +31,16 @@ export function Register() {
           newErrors.username = 'Username is required!';
           isValid = false;
         }
+
+        if (values.password === '') {
+          newErrors.password = 'Password is required!';
+          isValid = false;
+        }
+
+        if (values.email === '') {
+          newErrors.email = 'Email is required!';
+          isValid = false;
+        }
     
         setErrors(newErrors);
     
@@ -38,9 +49,7 @@ export function Register() {
 
     async function handleSubmit(e) {
         e.preventDefault();
-        // const safeValues = { ...values };
-        // delete safeValues.retypePassword;
-        const { retypePassword, ...safeValues } = values;
+  
         if (!formIsValid()) {
           return;
         }
@@ -50,10 +59,18 @@ export function Register() {
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify(safeValues),
+          body: JSON.stringify(values),
         }).then((res) => res.json());
-    
-        console.log(response);
+
+        if(response.username[0]==="A user with that username already exists."){
+          setErrors({...errors, username:response.username[0]});
+          setValues({...values , accountCreated:''});
+        }
+
+        if(response.username===values.username){
+          setValues({...values , accountCreated:'Account created successfully'});
+        }
+
       }
 
     return(
@@ -67,7 +84,7 @@ export function Register() {
             onChange={handleInputChange}
             value={values.username}
           />
-          {errors.email !== '' ? <strong>{errors.email}</strong> : null}
+          {errors.username !=="" ? <strong>{errors.username}</strong> : null}
         </div>
         <div>
           <label htmlFor="password">Password</label>
@@ -77,15 +94,17 @@ export function Register() {
             onChange={handleInputChange}
             value={values.password}
           />
+          {errors.password !=="" ? <strong>{errors.password}</strong> : null}
         </div>
         <div>
-          <label htmlFor="retypePassword">Retype Password</label>
+          <label htmlFor="email">Email</label>
           <input
-            type="password"
-            id="retypePassword"
+            type="email"
+            id="email"
             onChange={handleInputChange}
             value={values.retypePassword}
           />
+           {errors.email !=="" ? <strong>{errors.email}</strong> : null}
         </div>
         <div>
           <label htmlFor="firstName">First Name</label>
@@ -106,6 +125,9 @@ export function Register() {
           />
         </div>
         <button type="submit">Register</button>
+        <div>
+          {values.accountCreated !=="" ? <strong>{values.accountCreated}</strong> : null}
+        </div>
       </form>
     );
 }
